@@ -1,5 +1,6 @@
 #include "../ft_printf/ft_printf.h"
-#include "so_long.h"
+#include "../include/so_long.h"
+
 
 
 static void	execute_move(t_game_state *game, int direction)
@@ -23,18 +24,19 @@ static void	execute_move(t_game_state *game, int direction)
 
 int	handle_key_input(int keycode, t_game_state *game)
 {
-	if (keycode == 65307)
+	if (keycode == KEY_ESC)
 		cleanup_resources(game);
-	else if (keycode == 119)
+	else if (keycode == KEY_W)
 		execute_move(game, 1);
-	else if (keycode == 97)
+	else if (keycode == KEY_A)
 		execute_move(game, 2);
-	else if (keycode == 115)
+	else if (keycode == KEY_S)
 		execute_move(game, 3);
-	else if (keycode == 100)
+	else if (keycode == KEY_D)
 		execute_move(game, 4);
 	else
 		return (0);
+	render_frame(game);
 	return (0);
 }
 

@@ -1,22 +1,27 @@
 #include "../libft/libft.h"
-#include "so_long.h"
+#include "../include/so_long.h"
+
 
 
 int	verify_file_extension(char *filename)
 {
 	int	length;
+	int fd;
 
 	length = ft_strlen(filename);
-	if (length < 4)
-		return (0);
-	if (filename[length - 1] != 'r')
-		return (0);
-	if (filename[length - 2] != 'e')
-		return (0);
-	if (filename[length - 3] != 'b')
-		return (0);
-	if (filename[length - 4] != '.')
-		return (0);
+	if (filename[length - 1] != 'r' && filename[length - 2] != 'e'
+		&& filename[length - 3] != 'b' && filename[length - 4] != '.'
+		&& length > 4)
+			return(0);
+	else
+	{
+		fd = open(filename, O_RDONLY);
+		if(fd == -1)
+		{
+			close(fd);
+			return(0);
+		}
+	}
 	return (1);
 }
 

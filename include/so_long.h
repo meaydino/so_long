@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_engine.h                                      :+:      :+:    :+:   */
+/*   so_long.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: meaydino <meaydino@student.42kocaeli.com.t +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/22 00:00:00 by meaydino          #+#    #+#             */
-/*   Updated: 2025/05/22 00:00:00 by meaydino         ###   ########.fr       */
+/*   Updated: 2025/05/26 15:46:23 by meaydino         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-# define TILE_SIZE 100
-# define MAX_PATH 256
+# define PIXEL 96
 # define BUFFER_SIZE 1
 
 /* Key codes for movement */
@@ -78,10 +77,9 @@ int				main(int argc, char **argv);
 /* ************************************************************************** */
 
 /* pathfinding.c */
-void			flood_fill_algorithm(int **visited, t_game_state *game, 
+void			flood_fill_algorithm(int **visited, t_game_state *game,
 					int x, int y);
-void			create_visited_matrix(t_game_state *game, int start_x, 
-					int start_y);
+void			create_visited_matrix(t_game_state *game);
 void			verify_accessibility(t_game_state *game);
 
 /* ************************************************************************** */
@@ -90,7 +88,7 @@ void			verify_accessibility(t_game_state *game);
 
 /* map_parser.c */
 int				calculate_file_lines(char *filename);
-char			**build_grid_from_file(char *filename, int lines, 
+char			**build_grid_from_file(char *filename, int lines,
 					t_game_state *game);
 
 /* ************************************************************************** */
@@ -146,16 +144,14 @@ void			release_memory(void **memory_block);
 /*                              FILE READING                                 */
 /* ************************************************************************** */
 
-/* file_reader.c */
-char			*read_next_line(int fd);
+/* get_next_line */
+char	*get_next_line(int fd);
+
 
 /* ************************************************************************** */
 /*                             UTILITY MACROS                               */
 /* ************************************************************************** */
 
-# define SUCCESS 1
-# define FAILURE 0
-# define ERROR -1
 
 # define TEXTURE_PLAYER "textures/player.xpm"
 # define TEXTURE_COIN "textures/coin.xpm"

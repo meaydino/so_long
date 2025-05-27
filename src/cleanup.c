@@ -1,6 +1,6 @@
 #include "../ft_printf/ft_printf.h"
 #include "../minilibx/mlx.h"
-#include "so_long.h"
+#include "../include/so_long.h"
 #include <stdlib.h>
 
 void	cleanup_resources(t_game_state *game)
@@ -35,8 +35,10 @@ void	terminate_program(char *message, t_game_state *game, int flag)
 {
 	if (flag == 1)
 		release_memory((void **)game->board->cells);
-	free(game->board);
-	free(game);
+	if(game->board)
+		free(game->board);
+	if(game)
+		free(game);
 	ft_printf("%s\n", message);
 	exit(1);
 }

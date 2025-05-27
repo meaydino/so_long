@@ -9,7 +9,9 @@ SRC			=	src/cleanup.c			\
 				src/main.c	\
 				src/map_parser.c			\
 				src/pathfinding.c			\
-				src/validation.c
+				src/validation.c \
+				src/get_next_line.c
+
 LIBFT		= libft/libft.a
 FT_PRINTF	= ft_printf/libftprintf.a
 MLX			= minilibx/libmlx.a

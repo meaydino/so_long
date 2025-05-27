@@ -1,5 +1,6 @@
 #include "../libft/libft.h"
-#include "so_long.h"
+#include "../include/so_long.h"
+
 
 #include <fcntl.h>
 #include <stdlib.h>
@@ -58,11 +59,11 @@ char	**build_grid_from_file(char *filename, int lines, t_game_state *game)
 	if (!grid_data)
 		return (close(fd), NULL);
 	line_index = 0;
-	current_line = read_next_line(fd);
+	current_line = get_next_line(fd);
 	while (current_line)
 	{
 		grid_data[line_index++] = current_line;
-		current_line = read_next_line(fd);
+		current_line = get_next_line(fd);
 	}
 	grid_data[line_index] = NULL;
 	close(fd);

@@ -1,4 +1,5 @@
-#include "so_long.h"
+#include "../include/so_long.h"
+
 
 #include <stdlib.h>
 
@@ -37,7 +38,7 @@ static int	**allocate_visited_matrix(t_game_state *game)
 
 	matrix = (int **)malloc(sizeof(int *) * (game->board->height + 1));
 	if (!matrix)
-		terminate_program("Memory allocation failed", game, 1);
+		terminate_program(ERR_MALLOC, game, 1);
 	i = 0;
 	while (i < game->board->height)
 	{
@@ -45,7 +46,7 @@ static int	**allocate_visited_matrix(t_game_state *game)
 		if (!matrix[i])
 		{
 			release_memory((void **)matrix);
-			terminate_program("Memory allocation failed", game, 1);
+			terminate_program(ERR_MALLOC, game, 1);
 		}
 		i++;
 	}
@@ -71,7 +72,7 @@ static void	initialize_matrix(int **matrix, t_game_state *game)
 	}
 }
 
-void	create_visited_matrix(t_game_state *game, int start_x, int start_y)
+void	create_visited_matrix(t_game_state *game)
 {
 	int	**visited_grid;
 
@@ -85,9 +86,9 @@ void	create_visited_matrix(t_game_state *game, int start_x, int start_y)
 void	verify_accessibility(t_game_state *game)
 {
 	if (game->items_left != 0 && game->path_validated != 0)
-		terminate_program("Error: Path validation failed!", game, 1);
+		terminate_program(ERR_PATH_VALIDATION, game, 1);
 	if (game->items_left != 0)
-		terminate_program("Error: Some collectibles unreachable!", game, 1);
+		terminate_program(ERR_UNREACHABLE_ITEMS, game, 1);
 	if (game->path_validated != 0)
-		terminate_program("Error: Exit is unreachable!", game, 1);
+		terminate_program(ERR_UNREACHABLE_EXIT, game, 1);
 }

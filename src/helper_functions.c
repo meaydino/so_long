@@ -1,27 +1,28 @@
 #include "../libft/libft.h"
-#include "so_long.h"
+#include "../include/so_long.h"
+
 
 
 void	locate_hero_position(t_game_state *game)
 {
-	int	row;
-	int	col;
+	int	y;
+	int	x;
 
-	row = 0;
-	while (game->board->cells[row])
+	y = 0;
+	while (game->board->cells[y])
 	{
-		col = 0;
-		while (game->board->cells[row][col])
+		x = 0;
+		while (game->board->cells[y][x])
 		{
-			if (game->board->cells[row][col] == 'P')
+			if (game->board->cells[y][x] == 'P')
 			{
-				game->hero_pos.x = col;
-				game->hero_pos.y = row;
+				game->hero_pos.x = x;
+				game->hero_pos.y = y;
 				return ;
 			}
-			col++;
+			x++;
 		}
-		row++;
+		y++;
 	}
 	terminate_program("Player not found\n", game, 1);
 }
@@ -47,7 +48,7 @@ int	validate_characters(char *line)
 	index = 0;
 	while (line[index])
 	{
-		if (line[index] != '1' && line[index] != '0' && line[index] != 'P' 
+		if (line[index] != '1' && line[index] != '0' && line[index] != 'P'
 			&& line[index] != 'E' && line[index] != 'C')
 			return (0);
 		index++;
